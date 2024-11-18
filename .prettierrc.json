@@ -1,0 +1,10 @@
+{
+  "overrides": [
+    {
+      "files": "./languages/*.js",
+      "options": {
+        "printWidth": 1000
+      }
+    }
+  ]
+}
