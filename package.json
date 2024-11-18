@@ -1,7 +1,8 @@
 {
   "name": "regex-tokens",
-  "displayName": "RegexTokens",
-  "description": "tokens for regex",
+  "displayName": "Regex Tokens",
+  "description": "Cheat sheet for Tokens",
+  "publisher": "bs-code",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.95.0"
@@ -9,13 +10,102 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
   "main": "./extension.js",
   "contributes": {
-    "commands": [{
-      "command": "regex-tokens.helloWorld",
-      "title": "Hello World"
-    }]
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "regexTokens",
+          "title": "Regex Tokens",
+          "icon": "$(regex)",
+          "actions": [
+            {
+              "command": "myExtension.myAction",
+              "title": "My Action"
+            }
+          ]
+        }
+      ]
+    },
+    "views": {
+      "regexTokens": [
+        {
+          "id": "javascript",
+          "name": "Javascript",
+          "visibility": "visible"
+        },
+        {
+          "id": "python",
+          "name": "Python",
+          "visibility": "hidden"
+        },
+        {
+          "id": "lua",
+          "name": "Lua",
+          "visibility": "hidden"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "regexTokens.flatTree",
+        "title": "Show all tokens",
+        "category": "Regex Tokens",
+        "icon": "$(list-flat)"
+      },
+      {
+        "command": "regexTokens.nestedTree",
+        "title": "Show tokens in groups",
+        "category": "Regex Tokens",
+        "icon": "$(list-tree)"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "regexTokens.flatTree",
+          "when": "!regexTokens.isFlatTree && (view == javascript || view == python || view == lua)",
+          "group": "navigation"
+        },
+        {
+          "command": "regexTokens.nestedTree",
+          "when": "regexTokens.isFlatTree && (view == javascript || view == python || view == lua)",
+          "group": "navigation"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "key": "alt+cmd+t",
+        "command": "regexTokens.showTokens",
+        "when": "searchViewletFocus && !regexTokensVisible"
+      },
+      {
+        "key": "alt+cmd+t",
+        "command": "regexTokens.flatTree",
+        "when": "regexTokensVisible && !regexTokens.isFlatTree"
+      },
+      {
+        "key": "alt+cmd+t",
+        "command": "regexTokens.nestedTree",
+        "when": "regexTokensVisible && regexTokens.isFlatTree"
+      }
+    ]
+  },
+  "settings": {
+    "when": {
+      "tokensVisible": "regexTokensVisible",
+      "isFlatTree": "regexTokens.isFlatTree"
+    },
+    "commands": {
+      "showTokens": "regexTokens.showTokens",
+      "copyToken": "regexTokens.copyToken",
+      "setFlatTree": "regexTokens.flatTree",
+      "setNestedTree": "regexTokens.nestedTree"
+    }
   },
   "scripts": {
     "lint": "eslint .",
