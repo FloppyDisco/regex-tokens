@@ -3,6 +3,7 @@
   "displayName": "Regex Tokens",
   "description": "Cheat sheet for Tokens",
   "publisher": "bs-code",
+  "repository": "https://github.com/FloppyDisco/regex-tokens",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.95.0"
@@ -20,13 +21,7 @@
         {
           "id": "regexTokens",
           "title": "Regex Tokens",
-          "icon": "$(regex)",
-          "actions": [
-            {
-              "command": "myExtension.myAction",
-              "title": "My Action"
-            }
-          ]
+          "icon": "$(regex)"
         }
       ]
     },
